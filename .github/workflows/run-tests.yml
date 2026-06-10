@@ -14,15 +14,9 @@ jobs:
       fail-fast: true
       matrix:
         php: [8.2, 8.3]
-        laravel: [10.*, 11.*]
         stability: [prefer-stable]
-        include:
-          - laravel: 10.*
-            testbench: ^8.0
-          - laravel: 11.*
-            testbench: ^9.0
 
-    name: PHP ${{ matrix.php }} - Laravel ${{ matrix.laravel }}
+    name: PHP ${{ matrix.php }}
 
     steps:
       - name: Checkout code
@@ -41,9 +35,7 @@ jobs:
           echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
 
       - name: Install dependencies
-        run: |
-          composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
-          composer update --${{ matrix.stability }} --prefer-dist --no-interaction
+        run: composer update --${{ matrix.stability }} --prefer-dist --no-interaction
 
       - name: Run tests
         run: vendor/bin/pest
