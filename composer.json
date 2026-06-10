@@ -1,0 +1,57 @@
+{
+    "name": "ismailelbery/laravel-ldap-sync",
+    "description": "Sync users from Active Directory OUs into a local Eloquent model, with live LDAP search and manager resolution.",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ismail Elbery",
+            "email": "ismail.bery@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^8.2",
+        "directorytree/ldaprecord-laravel": "^3.0",
+        "spatie/laravel-package-tools": "^1.16"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^9.0",
+        "pestphp/pest": "^2.0",
+        "pestphp/pest-plugin-laravel": "^2.0",
+        "laravel/pint": "^1.13"
+    },
+    "autoload": {
+        "psr-4": {
+            "IsmailElbery\\LdapSync\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "IsmailElbery\\LdapSync\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/pest",
+        "test-coverage": "vendor/bin/pest --coverage",
+        "format": "vendor/bin/pint",
+        "format-test": "vendor/bin/pint --test"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "IsmailElbery\\LdapSync\\LdapSyncServiceProvider"
+            ],
+            "aliases": {
+                "LdapUserSearch": "IsmailElbery\\LdapSync\\Facades\\LdapUserSearch"
+            }
+        }
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
